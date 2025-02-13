@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     vim.defer_fn(function()
       vim.cmd("VenvSelectCached")
-    end, 200) -- Delay 200ms to avoid conflicts
+    end, 1000) -- Delay 1000ms to avoid load venv faster than LSP
   end,
 })
 
