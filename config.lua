@@ -7,10 +7,6 @@
 lvim.keys.normal_mode["gt"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["gT"] = ":BufferLineCyclePrev<CR>"
 
-lvim.plugins = {
-  { "mg979/vim-visual-multi", branch = "master" },
-}
-
 lvim.format_on_save = {
   enabled = true,
 }
@@ -20,6 +16,7 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- venv selector
 lvim.plugins = {
+  { "mg979/vim-visual-multi", branch = "master" },
   {
     "linux-cultist/venv-selector.nvim",
     branch = "regexp",
