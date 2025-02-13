@@ -8,10 +8,42 @@ lvim.keys.normal_mode["gt"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["gT"] = ":BufferLineCyclePrev<CR>"
 
 lvim.plugins = {
-    { "mg979/vim-visual-multi", branch = "master" },
+  { "mg979/vim-visual-multi", branch = "master" },
 }
 
 lvim.format_on_save = {
   enabled = true,
 }
 
+-- clipboard
+vim.opt.clipboard = 'unnamedplus'
+
+-- venv selector
+lvim.plugins = {
+  {
+    "linux-cultist/venv-selector.nvim",
+    branch = "regexp",
+    opts = {
+      auto_refresh = true,
+      search_workspace = true,
+      name = { "*venv", ".*venv" },
+      stay_on_this_version = true,
+    },
+  }
+}
+
+-- Auto-run VenvSelectCached when opening a Python file
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.py",
+  callback = function()
+    vim.defer_fn(function()
+      vim.cmd("VenvSelectCached")
+    end, 200) -- Delay 200ms to avoid conflicts
+  end,
+})
+
+lvim.builtin.which_key.mappings["v"] = {
+  name = "VirtualEnv",
+  p = { "<cmd>VenvSelect<cr>", "Pick VirtualEnv" },
+  c = { "<cmd>VenvSelectCached<cr>", "Use Cached VirtualEnv" },
+}
